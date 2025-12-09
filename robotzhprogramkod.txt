@@ -1,0 +1,28 @@
+PROC main()
+        Path_10;
+    ENDPROC
+    PROC Path_10()
+        Set GripperOpen;
+        WaitTime 1;
+        MoveAbsJ HOME,v1000,z100,Tool_Hand_E;
+        FOR sor FROM 0 TO 2 DO
+            FOR oszlop FROM 0 TO 1 DO
+            MoveJ RelTool(alakfelvesz,0,0,-200),v1000,z100,Tool_Hand_E\WObj:=beltConvWobj;   
+            MoveL alakfelvesz,v1000,fine,Tool_Hand_E\WObj:=beltConvWobj;        
+            Reset GripperOpen;
+            WaitTime 1;
+            MoveL RelTool(alakfelvesz,0,0,-200),v1000,z100,Tool_Hand_E\WObj:=beltConvWobj;
+            
+            
+            MoveJ offs(RelTool(alaklerak,0,0,-200),sor*(-50),oszlop*(-100),0),v1000,z100,Tool_Hand_E\WObj:=bigConvWobj;
+            MoveL offs (alaklerak,sor*(-50),oszlop*(-100),0),v1000,fine,Tool_Hand_E\WObj:=bigConvWobj;
+            Set GripperOpen;
+            WaitTime 1;
+            MoveL offs(RelTool(alaklerak,0,0,-200),sor*(-50),oszlop*(-100),0),v1000,z100,Tool_Hand_E\WObj:=bigConvWobj;
+            ENDFOR      
+        ENDFOR
+        
+        
+        MoveAbsJ HOME,v1000,z100,Tool_Hand_E;
+    ENDPROC
+ENDMODULE
